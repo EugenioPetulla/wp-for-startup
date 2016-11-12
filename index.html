@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+	<title>WordPress for startup: 4 modi in cui WP può aiutare la nascita della tua startup</title>
+	<link rel="stylesheet" type="text/css" href="css/reveal.min.css">
+	<link rel="stylesheet" type="text/css" href="css/default.css">
+    <link rel="stylesheet" type="text/css" href="css/darcula.css">
+	<link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,700" rel="stylesheet"> 
+</head>
+<body>
+	<div class="wplogo"><img src="assets/wplogo.png"></div>
+	<div class="reveal">
+        <div class="slides">
+            <section id="slide-1">
+            	<img src="images/wp-logo.png" width="350" height="350" class="white">
+            	<h2>WordPress per startup</h2>
+            	<h3>3(+1) modi in cui può aiutare la tua idea</h3>
+            </section>
+            <section id="slide-2">
+                <h1>Startup a chi??</h1>
+                <img src="images/confused.gif" alt="">
+            </section>
+            <section id="slide-3">
+                <h1>Il sysadmin dice:</h1>
+                <img class="fragment fade-in" src="images/scalabile.png">
+            </section>
+            <section id="slide-4">
+            	<h1>Il dev frontend dice:</h1>
+                <img class="fragment fade-in" src="images/blog.png">
+            </section>
+            <section id="slide-5">
+            	<h1>Il dev backend dice:</h1>
+                <img class="fragment fade-in" src="images/datamodel.png">
+            </section>
+            <section id="slide-6">
+            	<h1>L'hipster dev dice:</h1>
+                <img class="fragment fade-in" src="images/not-cool.png">
+            </section>
+            <section id="slide-7">
+                <h1>Eugenio Pensa:</h1>
+                <img class="fragment fade-in" src="images/robert.jpg">
+        	</section>
+        	<section id="slide-8" data-background-image="images/ceramic.jpg">
+        		<h2>La scuola di ceramiche</h2>
+        		<h3><a href="https://news.ycombinator.com/item?id=6097663">Tratto da "Art & Fear" - Hackernews</a></h3>
+        	</section>
+        	<section id="slide-9">
+                <h3>"Continuous improvement is better than delayed perfection."</h3>
+                <img src="images/mark-twain.jpg">
+                <h4 class="red"><em>Mark Twain (1835-1920)</em></h4>
+        	</section>
+        	<section id="slide-10">
+                <h2>Delayed Perfection</h2>
+                <img class="fragment fade-in" src="images/delayed.jpg">
+        	</section>
+        	<section id="slide-11">
+                <h2>Continuous Improvement</h2>
+                <img class="fragment fade-in" src="images/continuous.jpg">
+        	</section>
+        	<section id="slide-12">
+        		<h2>Feedbacks</h2>
+                <img src="images/react.png">
+        	</section>
+        	<section id="slide-13">
+        		<h2>Minimum Viable Product (MVP)</h2>
+                <p>Is a strategy used for fast and quantitative market testing of a product or product feature, popularized by <strong>Eric Ries</strong>, writer of <strong>"Lean Startup"</strong>, for web applications.</p>
+        	</section>
+        	<section id="slide-14">
+        		<h2>Modo #1 - Iterazione</h2>
+                <img src="images/iterazione.png">
+        	</section>
+        	<section id="slide-15">
+        		<h2>Modo #1 - Iterazione</h2>
+        		<h3>Custom Post Types</h3>
+                <img src="images/post-types.png">
+        	</section>
+        	<section id="slide-16">
+        	<h2>Register Post Type</h2>
+        		<pre><code>
+add_action( 'init', 'codex_book_init' );
+function codex_book_init() {
+	$labels = array(
+		'name'               => _x( 'Books', 'post type general name', 'your-plugin-textdomain' ),
+		'singular_name'      => _x( 'Book', 'post type singular name', 'your-plugin-textdomain' ),
+		'menu_name'          => _x( 'Books', 'admin menu', 'your-plugin-textdomain' ),
+		'name_admin_bar'     => _x( 'Book', 'add new on admin bar', 'your-plugin-textdomain' ),
+		'add_new'            => _x( 'Add New', 'book', 'your-plugin-textdomain' ),
+		'add_new_item'       => __( 'Add New Book', 'your-plugin-textdomain' ),
+		'new_item'           => __( 'New Book', 'your-plugin-textdomain' ),
+		'edit_item'          => __( 'Edit Book', 'your-plugin-textdomain' ),
+		'view_item'          => __( 'View Book', 'your-plugin-textdomain' ),
+		'all_items'          => __( 'All Books', 'your-plugin-textdomain' ),
+		'search_items'       => __( 'Search Books', 'your-plugin-textdomain' ),
+		'parent_item_colon'  => __( 'Parent Books:', 'your-plugin-textdomain' ),
+		'not_found'          => __( 'No books found.', 'your-plugin-textdomain' ),
+		'not_found_in_trash' => __( 'No books found in Trash.', 'your-plugin-textdomain' )
+	);
+        		</code></pre>
+        	</section>
+        	<section id="slide-17">
+        		<h2>Register Post Type</h2>
+        		<pre><code>
+$args = array(
+	'labels'             => $labels,
+	'description'        => __( 'Description.', 'your-plugin-textdomain' ),
+	'public'             => true,
+	'publicly_queryable' => true,
+	'show_ui'            => true,
+	'show_in_menu'       => true,
+	'query_var'          => true,
+	'rewrite'            => array( 'slug' => 'book' ),
+	'capability_type'    => 'post',
+	'has_archive'        => true,
+	'hierarchical'       => false,
+	'menu_position'      => null,
+	'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' )
+);
+
+register_post_type( 'book', $args );
+}
+        		</code></pre>
+        	</section>
+        	<section id="slide-18">
+        		<h2>Modo #1 - Iterazione</h2>
+        		<h3>Metadata</h3>
+                <img src="images/meta.jpg">
+        	</section>
+        	<section id="slide-19">
+        		<h2>Metadata Libraries</h2>
+                <img src="images/meta-lib.png">
+        	</section>
+        	<section id="slide-20">
+        		<h2>Modo #1 - Iterazione</h2>
+        		<h3>User Roles</h3>
+                <img src="images/roles.jpg">
+        	</section>
+        	<section id="slide-21">
+        		<h2>Role capabilities</h2>
+                <img src="images/roles-editor.jpg">
+        	</section>
+        	<section id="slide-22">
+                <img src="images/true-story.png">
+        	</section>
+        	<section id="slide-23">
+        		<h1>Case History</h1>
+                <img src="images/groupon.png">
+                <img src="images/groupon-story.jpg" class="fragment fade-in">
+        	</section>
+        	<section id="slide-24">
+                <img src="images/webapp.png">
+        	</section>
+        	<section id="slide-25">
+        		<h2>Modo #2 - Business Model</h2>
+                <h3 class="fragment fade-in">Vendita Online</h3>
+                <h3 class="fragment fade-in">Membership</h3>
+                <h3 class="fragment fade-in">E-Learning</h3>
+                <h3 class="fragment fade-in">User Centric (Social/Forum)</h3>
+        	</section>
+        	<section id="slide-26">
+        		<h1>Vendita Online</h1>
+        		<img src="images/woocommerce.png">
+        		<img src="images/edd.png">
+        	</section>
+        	<section id="slide-27">
+        		<h1>Membership</h1>
+        		<img src="images/memberpress.png">
+        		<img src="images/pmp.png">
+        	</section>
+        	<section id="slide-28">
+        		<h1>E-Learning</h1>
+        		<img src="images/learndash.png">
+        		<img src="images/lifter.png">
+        	</section>
+        	<section id="slide-29">
+        		<h1>Social/Forum</h1>
+        		<img src="images/buddypress.png">
+        		<img src="images/bbpress.png">
+        	</section>
+        	<section id="slide-30">
+        		<h2>Modo #3 - Contenuti</h2>
+                <h3 class="fragment fade-in">Blog/News</h3>
+                <h3 class="fragment fade-in">Landing Page</h3>
+                <h3 class="fragment fade-in">FAQ/Docs</h3>
+                <h3 class="fragment fade-in">Recensioni/Commenti</h3>
+        	</section>
+        	<section id="slide-31">
+        		<img src="images/newspapers.png">
+        	</section>
+        	<section id="slide-32">
+        		<h2>Modo #3+1 - Mercato</h2>
+                <h3 class="fragment fade-in">Il 26.4% di tutti i siti</h3>
+                <h6 class="fragment fade-in"><em>(cioè… di tutti i siti del mondo!!!)</em></h6>
+                <h3 class="fragment fade-in">70 milioni di siti</h3>
+                <h6 class="fragment fade-in"><em>(50/50 com/org)</em></h6>
+                <h3 class="fragment fade-in">350 milioni di plugin installati</h3>
+        	</section>
+        	<section id="slide-33">
+        		<img src="images/yith.jpg">
+        	</section>
+        	<section id="slide-34">
+        		<h1>Domande?</h1>
+        		<img src="images/ask.gif">
+        	</section>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/reveal.js"></script>
+    <script type="text/javascript" src="js/head.min.js"></script>
+	<script>
+        Reveal.initialize({
+                history: true,
+                // More info https://github.com/hakimel/reveal.js#dependencies
+                dependencies: [
+                    //{ src: 'plugin/markdown/marked.js' },
+                    //{ src: 'plugin/markdown/markdown.js' },
+                    //{ src: 'plugin/notes/notes.js', async: true },
+                    {src: 'plugin/highlight/highlight.js', async: true, condition: function () {
+                    return !!document.querySelector('pre code');
+                  }, callback: function () {
+                    hljs.initHighlightingOnLoad();
+                  }}
+                ]
+            });
+    </script>
+</body>
+</html>
